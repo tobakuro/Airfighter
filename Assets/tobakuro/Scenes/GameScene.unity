@@ -348,7 +348,7 @@ MonoBehaviour:
   dashDuration: 0.3
   dashCooldown: 0.5
   doubleTapWindow: 0.3
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 8367536625983149216, guid: b8676aee96b36f6438e10e265a8000f0, type: 3}
   firePoint: {fileID: 0}
   bulletSpeed: 20
   fireRate: 0.2
