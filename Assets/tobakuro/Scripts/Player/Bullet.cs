@@ -9,6 +9,12 @@ public class Bullet : MonoBehaviour
     [Header("エフェクト")]
     [SerializeField] private GameObject hitEffectPrefab;
     
+    // ダメージ値を外部から設定可能にする
+    public void SetDamage(float newDamage)
+    {
+        damage = newDamage;
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         // 敵レイヤーかチェック

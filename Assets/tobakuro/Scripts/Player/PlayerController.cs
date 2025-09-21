@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("移動設定")]
-    [SerializeField] private float moveSpeed = 8f;
+    [SerializeField] private float baseMoveSpeed = 8f;    // 基本移動速度
+    [SerializeField] private float currentMoveSpeed = 8f; // 現在の移動速度（アイテムで変化）
     [SerializeField] private float acceleration = 20f;    // 加速度（高めで反応良く）
     [SerializeField] private float deceleration = 25f;    // 減速度（高めで慣性弱く）
     
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletSpeed = 20f;
     [SerializeField] private float fireRate = 0.2f; // 連射間隔
+    [SerializeField] private float basePower = 10f; // 基本攻撃力
+    [SerializeField] private float currentPower = 10f; // 現在の攻撃力（アイテムで変化）
     
     // コンポーネント参照
     private Rigidbody rb;
@@ -180,7 +183,7 @@ public class PlayerController : MonoBehaviour
         else if (inputDirection != Vector3.zero)
         {
             // 通常の移動
-            targetVelocity = inputDirection * moveSpeed;
+            targetVelocity = inputDirection * currentMoveSpeed;
         }
         else
         {
@@ -220,17 +223,40 @@ public class PlayerController : MonoBehaviour
                 bulletRb.velocity = firePoint.forward * bulletSpeed;
             }
             
+            // 弾にダメージ値を設定
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            if (bulletScript != null)
+            {
+                bulletScript.SetDamage(currentPower);
+            }
+            
             // 5秒後に弾を破棄
             Destroy(bullet, 5f);
         }
     }
+    
+    // ステータス更新用メソッド（PlayerStatsから呼び出される）
+    public void SetMoveSpeed(float newMoveSpeed)
+    {
+        currentMoveSpeed = newMoveSpeed;
+    }
+    
+    public void SetPower(float newPower)
+    {
+        currentPower = newPower;
+    }
+    
+    // ゲッター
+    public float GetCurrentMoveSpeed() => currentMoveSpeed;
+    public float GetCurrentPower() => currentPower;
     
     // デバッグ用：現在の状態を表示
     void OnGUI()
     {
         if (Application.isEditor)
         {
-            GUILayout.Label($"速度: {currentVelocity.magnitude:F1}");
+            GUILayout.Label($"速度: {currentVelocity.magnitude:F1} (最大: {currentMoveSpeed:F1})");
+            GUILayout.Label($"攻撃力: {currentPower:F0}");
             GUILayout.Label($"ダッシュ中: {isDashing}");
             GUILayout.Label($"クールダウン: {dashCooldownTimer:F1}");
         }
