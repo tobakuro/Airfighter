@@ -3,7 +3,14 @@ guid: 9d905e5eaf789b54c9e7f336d1da77d2
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pickupEffectPrefab: {instanceID: 0}
+  - pickupSound: {instanceID: 0}
+  - speedMaterial: {instanceID: 0}
+  - powerMaterial: {instanceID: 0}
+  - hpMaterial: {instanceID: 0}
+  - defenseMaterial: {instanceID: 0}
+  - healMaterial: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
