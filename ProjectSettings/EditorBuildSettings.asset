@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/pansyu/Scenes/Title.unity
+    guid: ec9b8652fe0c74744b597e021c064a2f
+  - enabled: 1
+    path: Assets/pansyu/Scenes/PGameScene.unity
+    guid: d91be83c61b6d1a4fbd5ebcbbee751a8
   m_configObjects: {}
